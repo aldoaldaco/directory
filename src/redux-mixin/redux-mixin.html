@@ -23,7 +23,7 @@
         switch (action.type) {
             case 'ADD_CONTACT': {
                 const contacts = state.contacts.splice(0);
-                contacts.push(action.name);
+                contacts.push(action.user);
                 return Object.assign({}, state, {contacts});
             }
             case 'CHANGE_LANGUAGE': {

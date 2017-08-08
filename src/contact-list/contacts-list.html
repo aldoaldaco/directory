@@ -17,7 +17,7 @@
         (function contactsListDefinition(customElements) {
             'use strict';
 
-            class ContactsList extends Polymer.Element {
+            class ContactsList extends ReduxMixin(Polymer.Element) {
                 static get is() {
                     return 'contacts-list';
                 }
@@ -42,7 +42,7 @@
                     return {
                         contacts: {
                             type: Array,
-                            value: []
+                            statePath: 'contacts'
                         },
                         selected: {
                             type: Boolean,
