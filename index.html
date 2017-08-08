@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, minimun-scale=1.0, initial-sccale=1.0, user-scalable=true">
-        <title>DirectoryApp</title>
-        <script type="javascript" src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-        <link rel="import" href="/src/directory-app/directory-app.html">
-        <style>
-            html, body{
-                width: 100%;
-                height: 100%;
-                color: #000000;
-            }
-        </style>
-    </head>
-    <body>
-        <directory-app></directory-app>
-        <noscript>
-          Please enable JavaScript to view this website.
-        </noscript>
-    </body>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimun-scale=1.0, initial-sccale=1.0, user-scalable=true">
+    <title>DirectoryApp</title>
+    <script src="node_modules/redux/dist/redux.min.js"></script>
+    <script type="javascript" src="/bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="src/redux-mixin/redux-mixin.html">
+    <link rel="import" href="/src/directory-app/directory-app.html">
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+<redux-mixin></redux-mixin>
+<directory-app></directory-app>
+<noscript>
+    Please enable JavaScript to view this website.
+</noscript>
+</body>
 </html>

@@ -3,25 +3,29 @@
 <dom-module id="contacts-list">
     <template>
         <style>
-        contacts-item{
-            width: 100%;
-            height: 10%;
-            background-color: #CCCCCC;
-        }
+            contacts-item {
+                width: 100%;
+                height: 10%;
+                background-color: #CCCCCC;
+            }
         </style>
         <template is="dom-repeat" items="{{contacts}}">
             <contacts-item on-click="contactSelected" contact="[[item]]"></contacts-item>
         </template>
     </template>
     <script>
-        (function contactsListDefinition(customElements){
+        (function contactsListDefinition(customElements) {
             'use strict';
-            class ContactsList extends Polymer.Element {
-                static get is(){ return 'contacts-list'; }
-                static get properties(){
-                    return{
 
-                        contacts:{
+            class ContactsList extends Polymer.Element {
+                static get is() {
+                    return 'contacts-list';
+                }
+
+                static get properties() {
+                    return {
+
+                        contacts: {
                             type: Array,
                             value: [
                                 {
@@ -68,7 +72,7 @@
                                 }
                             ]
                         },
-                        selected:{
+                        selected: {
                             type: Boolean,
                             value: true,
                             notify: true
@@ -76,17 +80,19 @@
 
                     }
                 }
-                contactSelected(e){
-                      this.dispatchEvent(new CustomEvent('contact-selected',{
-                          bubbles: true,
-                          composed: true,
-                          detail: {
-                              item: e.model.item,
-                              selected: this.selected
-                          }
-                      }));
-                  }
+
+                contactSelected(e) {
+                    this.dispatchEvent(new CustomEvent('contact-selected', {
+                        bubbles: true,
+                        composed: true,
+                        detail: {
+                            item: e.model.item,
+                            selected: this.selected
+                        }
+                    }));
+                }
             }
+
             customElements.define(ContactsList.is, ContactsList);
         })(window.customElements);
     </script>

@@ -1,0 +1,23 @@
+<link rel="import" href="../../bower_components/polymer-redux/polymer-redux.html">
+
+<script>
+    const initialState = {
+        contacts: []
+    }
+
+    function contacts(state = initialState, action) {
+        switch (action.type) {
+            case 'ADD_CONTACT': {
+                const contacts = state.contacts.splice(0);
+                contacts.push(action.name);
+                return Object.assign({}, state, {contacts});
+            }
+            default: {
+                return state;
+            }
+        }
+    }
+
+    const store = Redux.createStore(contacts);
+    const ReduxMixin = PolymerRedux(store);
+</script>

@@ -20,28 +20,34 @@
     <template>
         <style>
             :host {
-            display: block;
-            font-family: sans-serif;
+                display: block;
+                font-family: sans-serif;
             }
+
             app-drawer-layout:not([narrow]) [drawer-toggle] {
-            display: none;
+                display: none;
             }
-            app-drawer{
-            border-right: 2px solid #2c3a44;
+
+            app-drawer {
+                border-right: 2px solid #2c3a44;
             }
+
             app-header {
-            display: flex;
-            flex-flow: row;
-            color: #fff;
-            background-color: #2c3a44;
+                display: flex;
+                flex-flow: row;
+                color: #fff;
+                background-color: #2c3a44;
             }
-            app-toolbar{
+
+            app-toolbar {
                 text-align: center;
             }
+
             app-header paper-icon-button {
-            --paper-icon-button-ink-color: white;
+                --paper-icon-button-ink-color: white;
             }
-            ul{
+
+            ul {
                 list-style: none;
                 margin: 0px;
                 margin-left: 20px;
@@ -49,11 +55,13 @@
                 text-align: left;
                 font-size: 20px;
             }
-            li:hover{
+
+            li:hover {
                 cursor: pointer;
                 background-color: #EBEBEB;
             }
-            a{
+
+            a {
                 text-decoration: none;
                 color: black;
             }
@@ -68,8 +76,12 @@
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
                 <app-toolbar main-title>{{localize('MENU')}}</app-toolbar>
                 <ul>
-                    <a href="/contacts"><li>{{localize('CONTACTS')}}</li></a>
-                    <a href="/settings"><li>{{localize('SETTINGS')}}</li></a>
+                    <a href="/contacts">
+                        <li>{{localize('CONTACTS')}}</li>
+                    </a>
+                    <a href="/settings">
+                        <li>{{localize('SETTINGS')}}</li>
+                    </a>
                 </ul>
             </app-drawer>
             <!--Aside-->
@@ -81,9 +93,12 @@
                     <app-toolbar main-title>{{localize('DIRECTORY')}} {{localize('APP')}}</app-toolbar>
                 </app-header>
 
-                <iron-pages selected="[[routeData.view]]" attr-for-selected="view" fallback-selection="view1">
+                <iron-pages selected="[[routeData.view]]" attr-for-selected="view" fallback-selection="default">
                     <contacts-app view="contacts"></contacts-app>
                     <settings-app view="settings"></settings-app>
+                    <div view="default">
+                        <h1>Error 404 - Page dont found.</h1>
+                    </div>
                 </iron-pages>
 
             </app-header-layout>
@@ -91,44 +106,54 @@
         </app-drawer-layout>
     </template>
     <script type="text/javascript">
-        (function directoryAppDefinition(customElements){
+        (function directoryAppDefinition(customElements) {
             'use strict';
+
             class DirectoryApp extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
-                static get is(){ return 'directory-app'; }
+                static get is() {
+                    return 'directory-app';
+                }
+
                 static get properties() {
-                  return {
-                    language: {
-                        value: 'en'
-                    }
-                  };
+                    return {
+                        language: {
+                            value: 'en'
+                        }
+                    };
                 }
+
                 static get observers() {
-                  return [
-                    '_routePageChanged(routeData.view)',
-                  ];
+                    return [
+                        '_routePageChanged(routeData.view)',
+                    ];
                 }
-                connectedCallback(){
+
+                connectedCallback() {
                     super.connectedCallback();
-                    this.loadResources(this.resolveUrl('locales.json'));
+                    this.loadResources(this.resolveUrl(`../../locales/directory-app/directory-app_${this.language}.json`));
                 }
+
                 _routePageChanged(page) {
-                  this.page = page || 'view2';
-                  if (!this.$.drawer.persistent) {
-                    this.$.drawer.close();
-                  }
+                    this.page = page || 'view2';
+                    if (!this.$.drawer.persistent) {
+                        this.$.drawer.close();
+                    }
                 }
+
                 _pageChanged(page) {
-                  var resolvedPageUrl = this.resolveUrl('/'+page);
-                  Polymer.importHref(
-                      resolvedPageUrl,
-                      null,
-                      this._showPage404.bind(this),
-                      true);
+                    var resolvedPageUrl = this.resolveUrl('/' + page);
+                    Polymer.importHref(
+                        resolvedPageUrl,
+                        null,
+                        this._showPage404.bind(this),
+                        true);
                 }
+
                 _showPage404() {
-                  this.page = 'view2';
-              }
+                    this.page = 'view2';
+                }
             }
+
             customElements.define(DirectoryApp.is, DirectoryApp);
         })(window.customElements);
     </script>
