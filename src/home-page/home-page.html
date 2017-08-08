@@ -1,0 +1,50 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<dom-module id="home-page">
+    <template>
+        <ul>
+            <template is="dom-repeat" items="[[languages]]">
+                <li on-tap="_handlerChangeLanguage">[[item.name]]</li>
+            </template>
+        </ul>
+    </template>
+    <script>
+        (function HomePageDefinition() {
+            'use strict';
+
+            class HomePage extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
+                static get is() {
+                    return 'home-page';
+                }
+
+                static get properties() {
+                    return {
+                        languages: {
+                            type: Array,
+                            statePath: 'languages'
+                        }
+                    };
+                }
+
+                static get actions() {
+                    return {
+                        changeLanguage(language) {
+                            return {
+                                type: 'CHANGE_LANGUAGE',
+                                language
+                            };
+                        }
+                    };
+                }
+
+                _handlerChangeLanguage(event) {
+                    const changedLanguageKey = event.model.item.key;
+                    this.dispatch('changeLanguage', changedLanguageKey);
+                }
+            }
+
+            customElements.define(HomePage.is, HomePage);
+        })();
+    </script>
+</dom-module>

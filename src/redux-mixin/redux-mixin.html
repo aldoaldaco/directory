@@ -2,6 +2,20 @@
 
 <script>
     const initialState = {
+        languages: [{
+            name: 'english',
+            key: 'en'
+        }, {
+            name: 'spanish',
+            key: 'es'
+        }, {
+            name: 'french',
+            key: 'fr'
+        }, {
+            name: 'italian',
+            key: 'it'
+        }],
+        languageSelected: 'en',
         contacts: []
     }
 
@@ -11,6 +25,13 @@
                 const contacts = state.contacts.splice(0);
                 contacts.push(action.name);
                 return Object.assign({}, state, {contacts});
+            }
+            case 'CHANGE_LANGUAGE': {
+                return Object.assign({}, state, {
+                    languages: state.languages,
+                    languageSelected: action.language,
+                    contacts: state.contacts
+                });
             }
             default: {
                 return state;

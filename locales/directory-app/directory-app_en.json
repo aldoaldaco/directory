@@ -4,6 +4,8 @@
     "DIRECTORY": "Directory",
     "CONTACTS": "People around me",
     "SETTINGS": "Settings",
-    "APP": "Application"
+    "APP": "Application",
+    "ADD_CONTACT_BUTTON": "Add contact",
+    "LANGUAGE": "Language"
   }
 }

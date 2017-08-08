@@ -8,6 +8,7 @@
 <link rel="import" href="../../bower_components/app-route/app-route.html">
 <link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 <link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
@@ -15,6 +16,7 @@
 
 <link rel="import" href="../contact-app/contacts-app.html">
 <link rel="import" href="../settings-app/settings-app.html">
+<link rel="import" href="../home-page/home-page.html">
 
 <dom-module id="directory-app">
     <template>
@@ -74,14 +76,13 @@
         <app-drawer-layout fullbleed narrow="{{narrow}}">
             <!--Aside-->
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-                <app-toolbar main-title>{{localize('MENU')}}</app-toolbar>
+                <app-toolbar main-title>[[localize('MENU')]]</app-toolbar>
                 <ul>
+                    <a href="/language">[[localize('LANGUAGE')]]</a>
                     <a href="/contacts">
-                        <li>{{localize('CONTACTS')}}</li>
+                        <li>[[localize('CONTACTS')]]</li>
                     </a>
-                    <a href="/settings">
-                        <li>{{localize('SETTINGS')}}</li>
-                    </a>
+                    <paper-button raised>[[localize('ADD_CONTACT_BUTTON')]]</paper-button>
                 </ul>
             </app-drawer>
             <!--Aside-->
@@ -96,6 +97,7 @@
                 <iron-pages selected="[[routeData.view]]" attr-for-selected="view" fallback-selection="default">
                     <contacts-app view="contacts"></contacts-app>
                     <settings-app view="settings"></settings-app>
+                    <home-page view="language"></home-page>
                     <div view="default">
                         <h1>Error 404 - Page dont found.</h1>
                     </div>
@@ -109,7 +111,7 @@
         (function directoryAppDefinition(customElements) {
             'use strict';
 
-            class DirectoryApp extends Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element) {
+            class DirectoryApp extends ReduxMixin(Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)) {
                 static get is() {
                     return 'directory-app';
                 }
@@ -117,7 +119,8 @@
                 static get properties() {
                     return {
                         language: {
-                            value: 'en'
+                            statePath: 'languageSelected',
+                            observer: '_changeLanguage'
                         }
                     };
                 }
@@ -130,6 +133,10 @@
 
                 connectedCallback() {
                     super.connectedCallback();
+                    this._changeLanguage();
+                }
+
+                _changeLanguage() {
                     this.loadResources(this.resolveUrl(`../../locales/directory-app/directory-app_${this.language}.json`));
                 }
 

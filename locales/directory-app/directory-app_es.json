@@ -4,6 +4,8 @@
     "DIRECTORY": "Directorio de contactos",
     "CONTACTS": "Mis contactos",
     "SETTINGS": "Configuración",
-    "APP": "Aplicación"
+    "APP": "Aplicación",
+    "ADD_CONTACT_BUTTON": "Nuevo contacto",
+    "LANGUAGE": "Selecciona idioma"
   }
 }
