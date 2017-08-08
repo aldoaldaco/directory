@@ -22,55 +22,27 @@
                     return 'contacts-list';
                 }
 
+                connectedCallback() {
+                    super.connectedCallback();
+                    fetch('https://randomuser.me/api/?results=10')
+                        .then(request => {
+                            return request.json();
+                        })
+                        .then(data => {
+                            data.results.forEach(result => {
+                                this.push('contacts', result);
+                            });
+                        })
+                        .catch(error => {
+                            console.log('Bad request loaded.');
+                        });
+                }
+
                 static get properties() {
                     return {
-
                         contacts: {
                             type: Array,
-                            value: [
-                                {
-                                    "id": 1,
-                                    "name": "aldo",
-                                    "phone": "5513044563",
-                                    "facebook": "aac_aldo7",
-                                    "picture": "http://via.placeholder.com/150x150"
-                                },
-                                {
-                                    "id": 2,
-                                    "name": "sujeto1",
-                                    "phone": "5555555555",
-                                    "facebook": "sujeto1",
-                                    "picture": "http://via.placeholder.com/250x150"
-                                },
-                                {
-                                    "id": 3,
-                                    "name": "sujeto2",
-                                    "phone": "5555555555",
-                                    "facebook": "sujeto2",
-                                    "picture": "http://via.placeholder.com/350x150"
-                                },
-                                {
-                                    "id": 4,
-                                    "name": "sujeto3",
-                                    "phone": "5555555555",
-                                    "facebook": "sujeto3",
-                                    "picture": "http://via.placeholder.com/450x150"
-                                },
-                                {
-                                    "id": 5,
-                                    "name": "sujeto4",
-                                    "phone": "5555555555",
-                                    "facebook": "sujeto4",
-                                    "picture": "http://via.placeholder.com/550x150"
-                                },
-                                {
-                                    "id": 6,
-                                    "name": "sujeto5",
-                                    "phone": "5555555555",
-                                    "facebook": "sujeto5",
-                                    "picture": "http://via.placeholder.com/650x150"
-                                }
-                            ]
+                            value: []
                         },
                         selected: {
                             type: Boolean,

@@ -15,10 +15,10 @@
             </style>
             <h2>[[prop]]</h2>
             <div class="container">
-                <div class="picture"><img src="[[contact.picture]]" alt="[[contact.name]]"></div>
-                <div class="name">[[contact.name]]</div>
-                <div class="facebook">[[contact.facebook]]</div>
-                <div class="phone">[[contact.phone]]</div>
+                <div class="picture"><img src="[[contact.picture.large]]" alt="[[contact.name.first]]"></div>
+                <div class="name">[[contact.name.title]]. [[contact.name.last]] [[contact.name.first]]</div>
+                <div class="facebook">[[contact.email]]</div>
+                <div class="phone">[[contact.cell]]</div>
             </div>
             <slot></slot>
         </template>
