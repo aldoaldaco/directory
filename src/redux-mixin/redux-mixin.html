@@ -16,21 +16,28 @@
             key: 'it'
         }],
         languageSelected: 'en',
-        contacts: []
+        contacts: [],
+        contact: {}
     }
 
     function contacts(state = initialState, action) {
         switch (action.type) {
             case 'ADD_CONTACT': {
-                const contacts = state.contacts.splice(0);
-                contacts.push(action.user);
-                return Object.assign({}, state, {contacts});
+                const newcontacts = state.contacts.splice(0);
+                newcontacts.push(action.contact);
+                return Object.assign({}, state, {
+                    languages: state.languages,
+                    languageSelected: state.languageSelected,
+                    contacts: newcontacts,
+                    contact: action.contact
+                });
             }
             case 'CHANGE_LANGUAGE': {
                 return Object.assign({}, state, {
                     languages: state.languages,
                     languageSelected: action.language,
-                    contacts: state.contacts
+                    contacts: state.contacts,
+                    contact: state.contact
                 });
             }
             default: {

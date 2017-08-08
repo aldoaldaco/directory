@@ -1,0 +1,93 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<dom-module id="contacts-form">
+    <template>
+        <style media="screen">
+            form{
+                width: 40%;
+                height: 50%;
+                margin: 0 auto;
+                margin-top: 100px;
+                display: flex;
+                flex-flow: column;
+                justify-content: center;
+                align-items: center;
+                background-color: #EBEBEB;
+            }
+            paper-input{
+                margin-bottom: 10px;
+                width: 80%;
+                --paper-input-container-focus-color: #2C3A44;
+                color: #FFFFFF;
+                margin: 0 auto;
+            }
+            paper-button{
+                width: 80%;
+                height: 100%;
+                margin: 0px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                background-color: #2C3A44;
+                font-weight: bold;
+                color: #FFFFFF;
+            }
+        </style>
+        <form>
+            <paper-input id="title" float-label label="Name"></paper-input>
+            <paper-input id="first" float-label label="First name"></paper-input>
+            <paper-input id="last" float-label label="Last name"></paper-input>
+            <paper-input id="email" float-label label="Email"></paper-input>
+            <paper-input id="cell" float-label label="Phone"></paper-input>
+            <paper-input id="picture" float-label label="Picture"></paper-input>
+            <paper-button on-tap="_addContact">Submit</paper-button>
+        </form>
+    </template>
+    <script>
+        (function contactsFormDefinition(customElements){
+            'use strict';
+            class ContactsForm extends ReduxMixin(Polymer.Element) {
+                static get is(){ return 'contacts-form'; }
+                static get properties(){
+                    return{
+                        contact: {
+                            statePath: 'contact'
+                        }
+                    };
+                }
+                static get actions() {
+                    return {
+                        addContact(contact) {
+                            return {
+                                type: 'ADD_CONTACT',
+                                contact
+                            };
+                        }
+                    };
+                }
+
+                _addContact() {
+                    const contact = {
+                        picture: this.$.picture.value,
+                        name:{
+                            title: this.$.title.value,
+                            first: this.$.first.value,
+                            last: this.$.last.value
+                        },
+                        cell: this.$.cell.value,
+                        email: this.$.email.value
+                    }
+                    this.dispatch('addContact', contact);
+                    this.$.title.value=null;
+                    this.$.first.value=null;
+                    this.$.last.value=null;
+                    this.$.email.value=null;
+                    this.$.cell.value=null;
+                    this.$.picture.value=null;
+                }
+            }
+            customElements.define(ContactsForm.is, ContactsForm);
+        })(window.customElements);
+    </script>
+</dom-module>
