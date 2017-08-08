@@ -1,0 +1,93 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="contacts-item/contacts-item.html">
+<dom-module id="contacts-list">
+    <template>
+        <style>
+        contacts-item{
+            width: 100%;
+            height: 10%;
+            background-color: #CCCCCC;
+        }
+        </style>
+        <template is="dom-repeat" items="{{contacts}}">
+            <contacts-item on-click="contactSelected" contact="[[item]]"></contacts-item>
+        </template>
+    </template>
+    <script>
+        (function contactsListDefinition(customElements){
+            'use strict';
+            class ContactsList extends Polymer.Element {
+                static get is(){ return 'contacts-list'; }
+                static get properties(){
+                    return{
+
+                        contacts:{
+                            type: Array,
+                            value: [
+                                {
+                                    "id": 1,
+                                    "name": "aldo",
+                                    "phone": "5513044563",
+                                    "facebook": "aac_aldo7",
+                                    "picture": "http://via.placeholder.com/150x150"
+                                },
+                                {
+                                    "id": 2,
+                                    "name": "sujeto1",
+                                    "phone": "5555555555",
+                                    "facebook": "sujeto1",
+                                    "picture": "http://via.placeholder.com/250x150"
+                                },
+                                {
+                                    "id": 3,
+                                    "name": "sujeto2",
+                                    "phone": "5555555555",
+                                    "facebook": "sujeto2",
+                                    "picture": "http://via.placeholder.com/350x150"
+                                },
+                                {
+                                    "id": 4,
+                                    "name": "sujeto3",
+                                    "phone": "5555555555",
+                                    "facebook": "sujeto3",
+                                    "picture": "http://via.placeholder.com/450x150"
+                                },
+                                {
+                                    "id": 5,
+                                    "name": "sujeto4",
+                                    "phone": "5555555555",
+                                    "facebook": "sujeto4",
+                                    "picture": "http://via.placeholder.com/550x150"
+                                },
+                                {
+                                    "id": 6,
+                                    "name": "sujeto5",
+                                    "phone": "5555555555",
+                                    "facebook": "sujeto5",
+                                    "picture": "http://via.placeholder.com/650x150"
+                                }
+                            ]
+                        },
+                        selected:{
+                            type: Boolean,
+                            value: true,
+                            notify: true
+                        }
+
+                    }
+                }
+                contactSelected(e){
+                      this.dispatchEvent(new CustomEvent('contact-selected',{
+                          bubbles: true,
+                          composed: true,
+                          detail: {
+                              item: e.model.item,
+                              selected: this.selected
+                          }
+                      }));
+                  }
+            }
+            customElements.define(ContactsList.is, ContactsList);
+        })(window.customElements);
+    </script>
+</dom-module>

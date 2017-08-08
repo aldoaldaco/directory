@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="contacts-list/contacts-list.html">
+<link rel="import" href="contacts-list/contacts-profile/contacts-profile.html">
+<dom-module id="contacts-app">
+    <template>
+        <style media="screen">
+        h2{
+            text-align: center;
+            color: #CCCCCC;
+        }
+        contacts-list{
+            overflow-y: scroll;
+        }
+        contacts-profile{
+            margin: 0 auto;
+            text-align: center;
+        }
+        </style>
+        <h2>[[prop]]</h2>
+        <contacts-list id="list" on-contact-selected="handleContactSelected"></contacts-list>
+        <contacts-profile id="profile" status="[[status]]" contact="[[contact]]">
+            <paper-button on-click="hideInformation">BACK</paper-button>
+        </contacts-profile>
+    </template>
+    <script>
+        (function contactsAppDefinition(customElements){
+            'use strict';
+            class ContactsApp extends Polymer.Element {
+                static get is(){ return 'contacts-app'; }
+                static get properties(){
+                    return {
+                        prop:{
+                            type: String,
+                            value: 'Contacts'
+                        },
+                        contact: {
+                            type: Object,
+                            value: {},
+                            notify: true
+                        },
+                        status:{
+                            type: Boolean,
+                            value: false,
+                            notify: true
+                        }
+                    };
+                }
+                handleContactSelected(event){
+                    this.contact = event.detail.item;
+                    this.status = event.detail.selected;
+                    this.$.list.style.display="none";
+                    this.$.profile.style.display="block";
+                }
+                hideInformation(){
+                    this.status = false;
+                    this.$.list.style.display="block";
+                    this.$.profile.style.display="none";
+                }
+            }
+            customElements.define(ContactsApp.is, ContactsApp);
+        })(window.customElements);
+    </script>
+</dom-module>

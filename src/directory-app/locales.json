@@ -1,0 +1,16 @@
+{
+    "es": {
+        "MENU": "MENUCITO",
+        "DIRECTORY": "DIRECTORIO",
+        "CONTACTS": "MIS CONTACTOS",
+        "SETTINGS": "CONTROLES",
+        "APP": "APLICACIÓN"
+    },
+    "en": {
+        "MENU": "MENU",
+        "DIRECTORY": "DIRECTORY",
+        "CONTACTS": "CONTACTS",
+        "SETTINGS": "SETTINGS",
+        "APP": "APP"
+    }
+}

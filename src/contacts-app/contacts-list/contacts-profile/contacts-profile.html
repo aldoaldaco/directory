@@ -1,0 +1,42 @@
+<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<dom-module id="contacts-profile">
+    <template id="">
+        <template is="dom-if" if="{{status}}">
+            <style media="screen">
+                .container{
+                    margin: 0 auto;
+                    width: 100%;
+                    height: 60%;
+                    background-color: #EBEBEB;
+                    border-bottom: 2px solid #2c3a44;
+                    color: #2c3a44;
+                    text-align: center;
+                }
+            </style>
+            <h2>[[prop]]</h2>
+            <div class="container">
+                <div class="picture"><img src="[[contact.picture]]" alt="[[contact.name]]"></div>
+                <div class="name">[[contact.name]]</div>
+                <div class="facebook">[[contact.facebook]]</div>
+                <div class="phone">[[contact.phone]]</div>
+            </div>
+            <slot></slot>
+        </template>
+    </template>
+    <script>
+        (function contactsProfileDefinition(customElements){
+            class ContactsProfile extends Polymer.Element {
+                static get is(){ return 'contacts-profile'; }
+                static get properties(){
+                    return{
+                        contact: {
+                            type: Object,
+                            notify: true
+                        }
+                    };
+                }
+            }
+            customElements.define(ContactsProfile.is, ContactsProfile);
+        })(window.customElements);
+    </script>
+</dom-module>
