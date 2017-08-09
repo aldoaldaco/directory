@@ -1,0 +1,11 @@
+{
+    "en": {
+        "PICTURE": "Picture",
+        "FIRST": "First name",
+        "LAST": "Last name",
+        "PHONE": "Cell phone",
+        "EMAIL": "E-mail address",
+        "TITLE": "Title",
+        "SUBMIT": "Submit"
+    }
+}

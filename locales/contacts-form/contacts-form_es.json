@@ -1,0 +1,11 @@
+{
+    "es": {
+        "PICTURE": "Imagen de perfil",
+        "FIRST": "Nombre",
+        "LAST": "Apellido paterno",
+        "PHONE": "Teléfono celular",
+        "EMAIL": "Correo electrónico",
+        "TITLE": "Titulo",
+        "SUBMIT": "Enviar"
+    }
+}

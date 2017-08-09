@@ -1,0 +1,11 @@
+{
+    "it": {
+        "PICTURE": "Immagine",
+        "FIRST": "Il nome",
+        "LAST": "Cognome",
+        "PHONE": "Cellulare",
+        "EMAIL": "Posta elettronica",
+        "TITLE": "Titolo",
+        "SUBMIT": "Inviare"
+    }
+}

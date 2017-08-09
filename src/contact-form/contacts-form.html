@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
@@ -35,22 +36,26 @@
             }
         </style>
         <form>
-            <paper-input id="title" float-label label="Name"></paper-input>
-            <paper-input id="first" float-label label="First name"></paper-input>
-            <paper-input id="last" float-label label="Last name"></paper-input>
-            <paper-input id="email" float-label label="Email"></paper-input>
-            <paper-input id="cell" float-label label="Phone"></paper-input>
-            <paper-input id="picture" float-label label="Picture"></paper-input>
-            <paper-button on-tap="_addContact">Submit</paper-button>
+            <paper-input id="title" float-label label="[[localize('TITLE')]]"></paper-input>
+            <paper-input id="first" float-label label="[[localize('FIRST')]]"></paper-input>
+            <paper-input id="last" float-label label="[[localize('LAST')]]"></paper-input>
+            <paper-input id="email" float-label label="[[localize('EMAIL')]]"></paper-input>
+            <paper-input id="cell" float-label label="[[localize('PHONE')]]"></paper-input>
+            <paper-input id="picture" float-label label="[[localize('PICTURE')]]"></paper-input>
+            <paper-button on-tap="_addContact">[[localize('SUBMIT')]]</paper-button>
         </form>
     </template>
     <script>
         (function contactsFormDefinition(customElements){
             'use strict';
-            class ContactsForm extends ReduxMixin(Polymer.Element) {
+            class ContactsForm extends ReduxMixin(Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)) {
                 static get is(){ return 'contacts-form'; }
                 static get properties(){
                     return{
+                        language: {
+                            statePath: 'languageSelected',
+                            observer: '_changeLanguage'
+                        },
                         contact: {
                             statePath: 'contact'
                         }
@@ -67,9 +72,17 @@
                     };
                 }
 
+                connectedCallback() {
+                    super.connectedCallback();
+                    this._changeLanguage();
+                }
+
                 _addContact() {
                     const contact = {
-                        picture: this.$.picture.value,
+                        picture: {
+                            large: this.$.picture.value,
+                            medium: this.$.picture.value
+                        },
                         name:{
                             title: this.$.title.value,
                             first: this.$.first.value,
@@ -85,6 +98,9 @@
                     this.$.email.value=null;
                     this.$.cell.value=null;
                     this.$.picture.value=null;
+                }
+                _changeLanguage() {
+                    this.loadResources(this.resolveUrl(`../../locales/contacts-form/contacts-form_${this.language}.json`));
                 }
             }
             customElements.define(ContactsForm.is, ContactsForm);
