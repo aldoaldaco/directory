@@ -7,10 +7,9 @@
     <template>
         <style media="screen">
             form{
-                width: 40%;
-                height: 50%;
+                width: 50%;
                 margin: 0 auto;
-                margin-top: 100px;
+                margin-top: 70px;
                 display: flex;
                 flex-flow: column;
                 justify-content: center;
@@ -91,14 +90,19 @@
                         cell: this.$.cell.value,
                         email: this.$.email.value
                     }
-                    this.dispatch('addContact', contact);
-                    this.$.title.value=null;
-                    this.$.first.value=null;
-                    this.$.last.value=null;
-                    this.$.email.value=null;
-                    this.$.cell.value=null;
-                    this.$.picture.value=null;
+                    if(this.$.first.value==null && this.$.last.value==null && this.$.email.value==null){
+                        alert("Algunos campos son requeridos");
+                    } else {
+                        this.dispatch('addContact', contact);
+                        this.$.title.value=null;
+                        this.$.first.value=null;
+                        this.$.last.value=null;
+                        this.$.email.value=null;
+                        this.$.cell.value=null;
+                        this.$.picture.value=null;
+                    }
                 }
+
                 _changeLanguage() {
                     this.loadResources(this.resolveUrl(`../../locales/contacts-form/contacts-form_${this.language}.json`));
                 }

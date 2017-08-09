@@ -25,6 +25,7 @@
             case 'ADD_CONTACT': {
                 const newcontacts = state.contacts.splice(0);
                 newcontacts.push(action.contact);
+                alert("Contacto agregado exitosamente");
                 return Object.assign({}, state, {
                     languages: state.languages,
                     languageSelected: state.languageSelected,
