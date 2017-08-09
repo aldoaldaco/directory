@@ -12,7 +12,8 @@
     "app-localize-behavior": "PolymerElements/app-localize-behavior#^2.0.0",
     "iron-swipeable-container": "PolymerElements/iron-swipeable-container#^1.0.3",
     "polymer-redux": "^1.0.1",
-    "paper-card": "PolymerElements/paper-card#^2.0.0"
+    "paper-card": "PolymerElements/paper-card#^2.0.0",
+    "paper-input": "PolymerElements/paper-input#^2.0.1"
   },
   "devDependencies": {
     "webcomponentsjs": "#^1.0.6"

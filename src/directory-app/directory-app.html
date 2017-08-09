@@ -68,6 +68,20 @@
                 text-decoration: none;
                 color: black;
             }
+            paper-button{
+                width: 80%;
+                height: 100%;
+                margin: 0px;
+                margin-top: 30px;
+                margin-bottom: 30px;
+                background-color: #2C3A44;
+                color: #CCCCCC;
+            }
+            paper-button a{
+                text-decoration: none;
+                font-weight: bold;
+                color: #FFFFFF;
+            }
         </style>
         <!--location & route-->
         <app-location route="{{route}}"></app-location>
@@ -79,11 +93,13 @@
             <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
                 <app-toolbar main-title>[[localize('MENU')]]</app-toolbar>
                 <ul>
-                    <a href="/language">[[localize('LANGUAGE')]]</a>
+                    <a href="/language">
+                        <li>[[localize('LANGUAGE')]]</li>
+                    </a>
                     <a href="/contacts">
                         <li>[[localize('CONTACTS')]]</li>
                     </a>
-                    <paper-button raised>[[localize('ADD_CONTACT_BUTTON')]]</paper-button>
+                    <paper-button raised><a href="/form">[[localize('ADD_CONTACT_BUTTON')]]</a></paper-button>
                 </ul>
             </app-drawer>
             <!--Aside-->
@@ -96,8 +112,8 @@
                 </app-header>
 
                 <iron-pages selected="[[routeData.view]]" attr-for-selected="view" fallback-selection="default">
+                    <contacts-form view="form"></contacts-form>
                     <contacts-app view="contacts"></contacts-app>
-                    <settings-app view="settings"></settings-app>
                     <home-page view="language"></home-page>
                     <page-404 view="default"></page-404>
                 </iron-pages>
@@ -110,7 +126,7 @@
         (function directoryAppDefinition(customElements) {
             'use strict';
 
-            class DirectoryApp extends ReduxMixin(Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)) {
+            class DirectoryApp extends ReduxMixin(Polymer.GestureEventListeners(Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element))) {
                 static get is() {
                     return 'directory-app';
                 }
