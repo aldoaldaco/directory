@@ -68,7 +68,8 @@
                 text-decoration: none;
                 color: black;
             }
-            paper-button{
+
+            paper-button {
                 width: 80%;
                 height: 100%;
                 margin: 0px;
@@ -77,7 +78,8 @@
                 background-color: #2C3A44;
                 color: #CCCCCC;
             }
-            paper-button a{
+
+            paper-button a {
                 text-decoration: none;
                 font-weight: bold;
                 color: #FFFFFF;
@@ -114,7 +116,8 @@
                 <iron-pages selected="[[routeData.view]]" attr-for-selected="view" fallback-selection="default">
                     <contacts-form view="form"></contacts-form>
                     <contacts-app view="contacts"></contacts-app>
-                    <home-page view="language"></home-page>
+                    <home-page view="language" on-iron-swipe="_handlerSwipeable"></home-page>
+                    <home-page view="" on-iron-swipe="_handlerSwipeable"></home-page>
                     <page-404 view="default"></page-404>
                 </iron-pages>
 
@@ -163,7 +166,7 @@
                 }
 
                 _pageChanged(page) {
-                    var resolvedPageUrl = this.resolveUrl('/' + page);
+                    let resolvedPageUrl = this.resolveUrl('/' + page);
                     Polymer.importHref(
                         resolvedPageUrl,
                         null,
@@ -173,6 +176,27 @@
 
                 _showPage404() {
                     this.page = 'view2';
+                }
+
+                static get actions() {
+                    return {
+                        changeLanguage(language) {
+                            return {
+                                type: 'CHANGE_LANGUAGE',
+                                language
+                            };
+                        }
+                    };
+                }
+
+                _handlerChangeLanguage(event) {
+                    const changedLanguageKey = event.model.item.key;
+                    this.dispatch('changeLanguage', changedLanguageKey);
+                }
+
+                _handlerSwipeable(event) {
+                    const changedLanguageKey = event.detail.target.key;
+                    this.dispatch('changeLanguage', changedLanguageKey);
                 }
             }
 

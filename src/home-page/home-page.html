@@ -6,12 +6,31 @@
 
 <dom-module id="home-page">
     <template>
-        <iron-swipeable-container>
-            <paper-card heading="Me too!"></paper-card>
-        </iron-swipeable-container>
-        <template is="dom-repeat" items="[[languages]]">
-            [[item.name]]
-        </template>
+        <style>
+            paper-card {
+                cursor: pointer;
+            }
+
+            .container {
+                padding-left: 40%;
+                padding-right: 20%;
+                width: 200px;
+                display: flex;
+                flex-direction: column;
+                align-content: space-around;
+            }
+        </style>
+        <div class="container">
+            <iron-swipeable-container>
+                <template is="dom-repeat" items="[[languages]]">
+                    <paper-card image="../../offline_resources/[[item.key]].png" alt="[[item.key]]" key="[[item.key]]">
+                        <div class="card-content">
+                            [[item.name]]
+                        </div>
+                    </paper-card>
+                </template>
+            </iron-swipeable-container>
+        </div>
     </template>
     <script>
         (function HomePageDefinition(customElements) {
