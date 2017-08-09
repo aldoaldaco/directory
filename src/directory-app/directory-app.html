@@ -17,6 +17,7 @@
 <link rel="import" href="../contact-app/contacts-app.html">
 <link rel="import" href="../settings-app/settings-app.html">
 <link rel="import" href="../home-page/home-page.html">
+<link rel="import" href="../page-404/page-404.html">
 
 <dom-module id="directory-app">
     <template>
@@ -98,9 +99,7 @@
                     <contacts-app view="contacts"></contacts-app>
                     <settings-app view="settings"></settings-app>
                     <home-page view="language"></home-page>
-                    <div view="default">
-                        <h1>Error 404 - Page dont found.</h1>
-                    </div>
+                    <page-404 view="default"></page-404>
                 </iron-pages>
 
             </app-header-layout>

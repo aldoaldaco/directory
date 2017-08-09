@@ -1,0 +1,7 @@
+{
+  "fr": {
+    "NAME": "Nom: {name}",
+    "PHONE": "Numéro de téléphone: {phone}",
+    "EMAIL": "Courrier électronique: {email}"
+  }
+}

@@ -1,5 +1,11 @@
 {
   "it": {
-    "hello": "Il mio nome è {name}"
+    "MENU": "Menu",
+    "DIRECTORY": "Direttorio",
+    "CONTACTS": "Persone intorno a me",
+    "SETTINGS": "Paramètres",
+    "APP": "Applicazione",
+    "ADD_CONTACT_BUTTON": "Aggiungi contatto",
+    "LANGUAGE": "Lingua"
   }
 }

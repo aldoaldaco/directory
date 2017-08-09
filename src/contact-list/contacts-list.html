@@ -24,7 +24,8 @@
 
                 connectedCallback() {
                     super.connectedCallback();
-                    fetch('https://randomuser.me/api/?results=10')
+                    fetch('/offline_resources/descarga.json')
+                    // fetch('https://randomuser.me/api/?results=10')
                         .then(request => {
                             return request.json();
                         })

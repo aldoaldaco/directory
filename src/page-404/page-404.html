@@ -1,0 +1,88 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<dom-module id="page-404">
+    <template>
+        <style>
+
+            * {
+                line-height: 1.2;
+                margin: 0;
+            }
+
+            html {
+                color: #888;
+                display: table;
+                font-family: sans-serif;
+                height: 100%;
+                text-align: center;
+                width: 100%;
+            }
+
+            body {
+                display: table-cell;
+                vertical-align: middle;
+                margin: 2em auto;
+            }
+
+            h1 {
+                color: #555;
+                font-size: 2em;
+                font-weight: 400;
+            }
+
+            p {
+                margin: 0 auto;
+                width: 280px;
+            }
+
+            @media only screen and (max-width: 280px) {
+
+                body, p {
+                    width: 95%;
+                }
+
+                h1 {
+                    font-size: 1.5em;
+                    margin: 0 0 0.3em;
+                }
+
+            }
+
+        </style>
+        <h1>[[localize('TITLE')]]</h1>
+        <p>[[localize('BODY')]]</p>
+
+    </template>
+    <script>
+        (function Page404Definition(customElements) {
+            'use strict';
+
+            class Page404 extends ReduxMixin(Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)) {
+                static get is() {
+                    return 'page-404';
+                }
+
+                connectedCallback() {
+                    super.connectedCallback();
+                    this._changeLanguage();
+                }
+
+                static get properties() {
+                    return {
+                        language: {
+                            statePath: 'languageSelected',
+                            observer: '_changeLanguage'
+                        }
+                    };
+                }
+
+                _changeLanguage() {
+                    this.loadResources(this.resolveUrl(`../../locales/page-404/page-404_${this.language}.json`));
+                }
+            }
+
+            customElements.define(Page404.is, Page404);
+        })(window.customElements);
+    </script>
+</dom-module>

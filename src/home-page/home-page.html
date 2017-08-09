@@ -1,16 +1,20 @@
-<link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/polymer/lib/mixins/gesture-event-listeners.html">
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/iron-swipeable-container/iron-swipeable-container.html">
+
 <dom-module id="home-page">
     <template>
-        <ul>
-            <template is="dom-repeat" items="[[languages]]">
-                <li on-tap="_handlerChangeLanguage">[[item.name]]</li>
-            </template>
-        </ul>
+        <iron-swipeable-container>
+            <paper-card heading="Me too!"></paper-card>
+        </iron-swipeable-container>
+        <template is="dom-repeat" items="[[languages]]">
+            [[item.name]]
+        </template>
     </template>
     <script>
-        (function HomePageDefinition() {
+        (function HomePageDefinition(customElements) {
             'use strict';
 
             class HomePage extends ReduxMixin(Polymer.GestureEventListeners(Polymer.Element)) {
@@ -45,6 +49,6 @@
             }
 
             customElements.define(HomePage.is, HomePage);
-        })();
+        })(window.customElements);
     </script>
 </dom-module>

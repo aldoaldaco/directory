@@ -1,4 +1,6 @@
 <link rel="import" href="../../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
 <dom-module id="contacts-item">
     <template id="">
         <style>
@@ -39,16 +41,17 @@
                 margin: 0px;
                 margin-top: 10px;
                 margin-bottom: 10px;
+                text-transform: capitalize;
             }
         </style>
         <div class="container">
             <div class="profile">
-                <img src="[[contact.picture.large]]" alt="[[contact.name.first]]">
+                <img src="[[contact.picture.large]]" alt="[[fullName]]">
             </div>
             <div class="information">
-                <p>NAME: [[contact.name.title]]. [[contact.name.last]] [[contact.name.first]]</p>
-                <p>PHONE: [[contact.cell]]</p>
-                <p>FACEBOOK: [[contact.email]]</p>
+                <p>[[localize('NAME','name', fullName)]]</p>
+                <p>[[localize('PHONE','phone', contact.cell)]]</p>
+                <p>[[localize('EMAIL','email', contact.email)]]</p>
             </div>
         </div>
     </template>
@@ -56,18 +59,38 @@
         (function contactsItemDefinition() {
             'use strict';
 
-            class ContactsItem extends Polymer.Element {
+            class ContactsItem extends ReduxMixin(Polymer.mixinBehaviors([Polymer.AppLocalizeBehavior], Polymer.Element)) {
                 static get is() {
                     return 'contacts-item';
                 }
 
+                connectedCallback() {
+                    super.connectedCallback();
+                    this._changeLanguage();
+                }
+
                 static get properties() {
                     return {
+                        language: {
+                            statePath: 'languageSelected',
+                            observer: '_changeLanguage'
+                        },
                         prop: {
                             type: String,
                             value: 'Contact item'
+                        },
+                        fullName: {
+                            computed: '_getFullName(contact.name)'
                         }
                     }
+                }
+
+                _changeLanguage() {
+                    this.loadResources(this.resolveUrl(`../../locales/contacts-item/contacts-item_${this.language}.json`));
+                }
+
+                _getFullName(name) {
+                    return `${name.title} ${name.last} ${name.first}`;
                 }
             }
 

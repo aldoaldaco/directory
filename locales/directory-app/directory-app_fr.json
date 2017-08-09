@@ -1,9 +1,11 @@
 {
   "fr": {
-    "MENU": "Menú",
-    "DIRECTORY": "Directorio de contactos",
-    "CONTACTS": "Mis contactos",
-    "SETTINGS": "Configuración",
-    "APP": "Aplicación"
+    "MENU": "Menu",
+    "DIRECTORY": "Contact Annuaire",
+    "CONTACTS": "Les gens autour de moi",
+    "SETTINGS": "Configuration du système",
+    "APP": "application",
+    "ADD_CONTACT_BUTTON": "Ajouter un contact",
+    "LANGUAGE": "Langage"
   }
 }

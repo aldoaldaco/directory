@@ -1,0 +1,7 @@
+{
+  "en": {
+    "NAME": "Name: {name}",
+    "PHONE": "Cell phone: {phone}",
+    "EMAIL": "E-mail address: {email}"
+  }
+}
